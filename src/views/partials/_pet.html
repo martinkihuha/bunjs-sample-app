@@ -1,0 +1,48 @@
+<div
+  class="relative block bg-white border border-slate-100 rounded-lg shadow-md overflow-hidden hover:scale-105 transition-all duration-300"
+>
+  <div class="aspect-video bg-gray-100">
+    <img
+      src="<%= pet.photo %>"
+      alt="<%= pet.name %>"
+      class="size-full object-cover"
+      style="view-transition-name: pet-img-<%= pet.id %>"
+      onerror="this.onerror=null;this.src='https://placehold.co/640x480/94a3b8/fff?text=<%= pet.name %>'"
+    />
+  </div>
+
+  <div class="space-y-1 p-3">
+    <div class="flex items-center justify-between">
+      <h2
+        class="text-lg font-semibold text-gray-900"
+        style="view-transition-name: pet-name-<%= pet.id %>"
+      >
+        <a
+          href="/pet/<%= pet.id %>"
+          hx-get="/pet/<%= pet.id %>"
+          hx-target="#content"
+          hx-swap="innerHTML"
+          hx-push-url="true"
+        >
+          <span class="absolute inset-0"></span>
+          <%= pet.name %>
+        </a>
+      </h2>
+
+      <span
+        class="text-xs <%= pet.adopted ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800' %> px-2 py-1 rounded-full font-medium"
+        style="view-transition-name: pet-status-<%= pet.id %>"
+      >
+        <%= pet.adopted ? 'Adopted' : 'Available' %>
+      </span>
+    </div>
+
+    <div class="flex items-center justify-between text-xs text-stone-700">
+      <p style="view-transition-name: pet-breed-<%= pet.id %>">
+        <%= pet.breed %> - <%= pet.species %>
+      </p>
+
+      <div><%= pet.age %> yr<% if (pet.age != 1) { %>s<% } %></div>
+    </div>
+  </div>
+</div>

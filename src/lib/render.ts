@@ -5,6 +5,7 @@ const eta = new Eta({
   views: join(import.meta.dir, '../views'),
   autoEscape: false,
   defaultExtension: '.html',
+  useWith: true,
 })
 
 export function renderView(view: string, data: Record<string, unknown>) {
