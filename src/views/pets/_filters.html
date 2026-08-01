@@ -1,0 +1,58 @@
+<form id="filters" class="flex flex-wrap gap-2 mb-8">
+  <select
+    name="species"
+    class="rounded bg-white border border-stone-300 px-3 py-2 text-sm"
+    hx-get="/pets"
+    hx-target="#content"
+    hx-trigger="change"
+    hx-push-url="true"
+  >
+    <option value="">--- All Species ---</option>
+    <option value="dog" <%= it.species === 'dog' ? 'selected' : '' %>>Dog</option>
+    <option value="cat" <%= it.species === 'cat' ? 'selected' : '' %>>Cat</option>
+    <option value="rabbit" <%= it.species === 'rabbit' ? 'selected' : '' %>>Rabbit</option>
+  </select>
+
+  <select
+    name="adopted"
+    class="rounded bg-white border border-stone-300 px-3 py-2 text-sm"
+    hx-get="/pets"
+    hx-target="#content"
+    hx-trigger="change"
+    hx-push-url="true"
+  >
+    <option value="">--- All Status ---</option>
+    <option value="false" <%= it.adopted === 'false' ? 'selected' : '' %>>Available</option>
+    <option value="true" <%= it.adopted === 'true' ? 'selected' : '' %>>Adopted</option>
+  </select>
+
+  <select
+    name="minAge"
+    class="rounded bg-white border border-stone-300 px-3 py-2 text-sm"
+    hx-get="/pets"
+    hx-target="#content"
+    hx-trigger="change"
+    hx-push-url="true"
+  >
+    <option value="">--- Min Age ---</option>
+    <% for (let i = 1; i <= 10; i++) { %>
+      <option value="<%= i %>" <%= it.minAge === String(i) ? 'selected' : '' %>><%= i %> year<%= i != 1 ? 's' : '' %></option>
+    <% } %>
+  </select>
+
+  <select
+    name="maxAge"
+    class="rounded bg-white border border-stone-300 px-3 py-2 text-sm"
+    hx-get="/pets"
+    hx-target="#content"
+    hx-trigger="change"
+    hx-push-url="true"
+  >
+    <option value="">--- Max Age ---</option>
+    <% for (let i = 1; i <= 10; i++) { %>
+      <option value="<%= i %>" <%= it.maxAge === String(i) ? 'selected' : '' %>><%= i %> year<%= i != 1 ? 's' : '' %></option>
+    <% } %>
+  </select>
+
+  <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Filter</button>
+</form>
