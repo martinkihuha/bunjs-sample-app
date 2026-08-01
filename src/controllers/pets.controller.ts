@@ -26,7 +26,7 @@ export const getPets = (c: Context) => {
   }
 
   return c.html(
-    renderView('pets', {
+    renderView('pets/index', {
       title: 'Pets — Pet Shelter',
       pets: filtered,
       species: species || '',
@@ -44,5 +44,5 @@ export const getPetById = (c: Context) => {
     c.status(404)
     return c.html(renderView('404-pet', { title: 'Pet Not Found', id }))
   }
-  return c.html(renderView('pet', { title: `${pet.name} — Pet Shelter`, pet }))
+  return c.html(renderView('pets/show', { title: `${pet.name} — Pet Shelter`, pet }))
 }
