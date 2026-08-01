@@ -1,39 +1,90 @@
-<h1 class="text-3xl font-bold mb-6">Our Pets</h1>
+<div class="flex items-center justify-between">
+  <h1 class="text-3xl font-bold mb-6">Our Pets</h1>
 
-<form id="filters" class="flex flex-wrap gap-4 mb-8">
-  <select name="species" class="border rounded px-3 py-2">
-    <option value="">All Species</option>
-    <option value="dog">Dog</option>
-    <option value="cat">Cat</option>
-    <option value="rabbit">Rabbit</option>
-  </select>
-  <select name="adopted" class="border rounded px-3 py-2">
-    <option value="">All Status</option>
-    <option value="false">Available</option>
-    <option value="true">Adopted</option>
-  </select>
-  <input type="number" name="minAge" placeholder="Min age" class="border rounded px-3 py-2 w-24" />
-  <input type="number" name="maxAge" placeholder="Max age" class="border rounded px-3 py-2 w-24" />
-  <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Filter</button>
-</form>
+  <form id="filters" class="flex flex-wrap gap-2 mb-8">
+    <select
+      name="species"
+      class="rounded border border-stone-300 px-3 py-2 text-sm"
+      hx-get="/pets"
+      hx-target="#content"
+      hx-trigger="change"
+      hx-push-url="true"
+    >
+      <option value="">--- All Species ---</option>
+      <option value="dog" <%= it.species === 'dog' ? 'selected' : '' %>>Dog</option>
+      <option value="cat" <%= it.species === 'cat' ? 'selected' : '' %>>Cat</option>
+      <option value="rabbit" <%= it.species === 'rabbit' ? 'selected' : '' %>>Rabbit</option>
+    </select>
+
+    <select
+      name="adopted"
+      class="rounded border border-stone-300 px-3 py-2 text-sm"
+      hx-get="/pets"
+      hx-target="#content"
+      hx-trigger="change"
+      hx-push-url="true"
+    >
+      <option value="">--- All Status ---</option>
+      <option value="false" <%= it.adopted === 'false' ? 'selected' : '' %>>Available</option>
+      <option value="true" <%= it.adopted === 'true' ? 'selected' : '' %>>Adopted</option>
+    </select>
+
+    <select
+      name="minAge"
+      class="rounded border border-stone-300 px-3 py-2 text-sm"
+      hx-get="/pets"
+      hx-target="#content"
+      hx-trigger="change"
+      hx-push-url="true"
+    >
+      <option value="">--- Min Age ---</option>
+      <% for (let i = 1; i <= 10; i++) { %>
+        <option value="<%= i %>" <%= it.minAge === String(i) ? 'selected' : '' %>><%= i %> year<%= i != 1 ? 's' : '' %></option>
+      <% } %>
+    </select>
+
+    <select
+      name="maxAge"
+      class="rounded border border-stone-300 px-3 py-2 text-sm"
+      hx-get="/pets"
+      hx-target="#content"
+      hx-trigger="change"
+      hx-push-url="true"
+    >
+      <option value="">--- Max Age ---</option>
+      <% for (let i = 1; i <= 10; i++) { %>
+        <option value="<%= i %>" <%= it.maxAge === String(i) ? 'selected' : '' %>><%= i %> year<%= i != 1 ? 's' : '' %></option>
+      <% } %>
+    </select>
+
+    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Filter</button>
+  </form>
+</div>
 
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
   <% it.pets.forEach(function(pet) { %>
-    <a href="/pets/<%= pet.id %>" class="block bg-white rounded-lg shadow hover:shadow-md transition">
+    <a href="/pets/<%= pet.id %>" class="block bg-white rounded-lg shadow hover:shadow-md transition"
+      hx-get="/pets/<%= pet.id %>" hx-target="#content" hx-trigger="change" hx-push-url="true">
       <div class="h-48 bg-gray-200 rounded-t-lg flex items-center justify-center text-gray-400 text-lg">
         <%= pet.photo %>
       </div>
+
       <div class="p-4">
         <div class="flex items-center justify-between">
           <h2 class="text-xl font-semibold"><%= pet.name %></h2>
-          <% if (pet.adopted) { %>
-            <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">Adopted</span>
-          <% } else { %>
-            <span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded">Available</span>
-          <% } %>
+
+          <span class="text-xs <%= pet.adopted ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800' %> px-2 py-1 rounded">
+            <%= pet.adopted ? 'Adopted' : 'Available' %>
+          </span>
         </div>
-        <p class="text-gray-600 mt-1"><%= pet.species %> &middot; <%= pet.breed %></p>
-        <p class="text-gray-500 text-sm"><%= pet.age %> year<%= pet.age !== 1 ? 's' : '' %> old</p>
+
+        <p class="text-gray-600 mt-1">
+          <%= pet.species %> &middot; <%= pet.breed %>
+        </p>
+
+        <p class="text-gray-500 text-sm">
+          <%= pet.age %> year<%= pet.age !==1 ? 's' : '' %> old
+        </p>
       </div>
     </a>
   <% }) %>

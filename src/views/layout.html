@@ -14,11 +14,11 @@
 <body class="min-h-screen flex flex-col" hx-boost="true" hx-target="#content" hx-swap="innerHTML" hx-push-url="true">
   <header id="header" class="bg-gray-800 text-white" hx-swap-oob="true">
     <nav class="container mx-auto flex items-center justify-between p-4">
-      <a href="/" class="text-xl font-bold">My App</a>
+      <a href="/" class="text-xl font-bold" hx-get="/" hx-target="#content" hx-trigger="change" hx-push-url="true">Pets Shelter</a>
       <ul class="flex gap-4">
-        <li><a href="/" class="hover:underline">Home</a></li>
-        <li><a href="/pets" class="hover:underline">Pets</a></li>
-        <li><a href="/about" class="hover:underline">About</a></li>
+        <li><a href="/" class="hover:underline" hx-get="/" hx-target="#content" hx-trigger="change" hx-push-url="true">Home</a></li>
+        <li><a href="/pets" class="hover:underline" hx-get="/pets" hx-target="#content" hx-trigger="change" hx-push-url="true">Pets</a></li>
+        <li><a href="/about" class="hover:underline" hx-get="/about" hx-target="#content" hx-trigger="change" hx-push-url="true">About</a></li>
       </ul>
     </nav>
   </header>
