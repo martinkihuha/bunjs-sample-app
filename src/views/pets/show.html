@@ -1,14 +1,6 @@
-<a href="/pets" class="inline-flex items-center text-blue-600 hover:text-blue-800 mb-6" hx-get="/pets"
-  hx-target="#content" hx-swap="innerHTML" hx-push-url="true">
-  <svg class="size-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-  </svg>
-  Back to all pets
-</a>
-
-<div class="bg-white rounded-lg shadow-md overflow-hidden">
+<div class="bg-card rounded-lg shadow-md overflow-hidden">
   <div class="md:flex">
-    <div class="md:w-1/2 h-80 md:h-auto bg-gray-200">
+    <div class="md:w-1/2 h-80 md:h-auto bg-secondary">
       <img
         src="<%= it.pet.photo %>"
         alt="<%= it.pet.name %>"
@@ -19,7 +11,7 @@
     </div>
     <div class="p-6 md:w-1/2">
       <div class="flex items-center justify-between mb-4">
-        <h1 class="text-3xl font-bold text-gray-900" style="view-transition-name: pet-name-<%= it.pet.id %>">
+        <h1 class="text-3xl font-bold text-foreground" style="view-transition-name: pet-name-<%= it.pet.id %>">
           <%= it.pet.name %>
         </h1>
 
@@ -34,32 +26,32 @@
       <dl class="space-y-3">
         <div class="flex justify-between">
           <dt class="text-gray-500">Species</dt>
-          <dd class="text-gray-900 font-medium">
+          <dd class="text-foreground font-medium">
             <%= it.pet.species %>
           </dd>
         </div>
         <div class="flex justify-between">
           <dt class="text-gray-500">Breed</dt>
-          <dd class="text-gray-900 font-medium" style="view-transition-name: pet-breed-<%= it.pet.id %>">
+          <dd class="text-foreground font-medium" style="view-transition-name: pet-breed-<%= it.pet.id %>">
             <%= it.pet.breed %>
           </dd>
         </div>
         <div class="flex justify-between">
           <dt class="text-gray-500">Age</dt>
-          <dd class="text-gray-900 font-medium">
-            <%= it.pet.age %> yr<% if (it.pet.age != 1) { %>s<% } %>
+          <dd class="text-foreground font-medium" style="view-transition-name: pet-age-<%= pet.id %>">
+            <%= it.pet.age %> yr<% if (it.pet.age !=1) { %>s<% } %>
           </dd>
         </div>
         <div class="flex justify-between">
           <dt class="text-gray-500">Intake Date</dt>
-          <dd class="text-gray-900 font-medium">
+          <dd class="text-foreground font-medium">
             <%= it.pet.intakeDate.toISOString().split('T')[0] %>
           </dd>
         </div>
         <% if (it.pet.adoptionDate) { %>
           <div class="flex justify-between">
             <dt class="text-gray-500">Adoption Date</dt>
-            <dd class="text-gray-900 font-medium">
+            <dd class="text-foreground font-medium">
               <%= it.pet.adoptionDate.toLocaleDateString() %>
             </dd>
           </div>
@@ -68,17 +60,17 @@
 
       <hr class="my-4" />
 
-      <h2 class="text-lg font-semibold text-gray-900 mb-3">Medical Record</h2>
+      <h2 class="text-lg font-semibold text-foreground mb-3">Medical Record</h2>
       <dl class="space-y-3">
         <div class="flex justify-between">
           <dt class="text-gray-500">Weight</dt>
-          <dd class="text-gray-900 font-medium">
+          <dd class="text-foreground font-medium">
             <%= it.pet.medicalRecord.weightKg %> kg
           </dd>
         </div>
         <div class="flex justify-between">
           <dt class="text-gray-500">Microchip</dt>
-          <dd class="text-gray-900 font-medium">
+          <dd class="text-foreground font-medium">
             <%= it.pet.medicalRecord.microchipId || 'None' %>
           </dd>
         </div>

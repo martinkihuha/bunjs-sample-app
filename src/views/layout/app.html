@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="view-transition" content="same-origin" />
+
+  <title>
+    <%= it.title || 'Karibu' %> - Pet Shelter
+  </title>
+
+  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="stylesheet" href="/js/app.css" />
+
+  <script src="/js/app.js"></script>
+  <script>
+    htmx.config.globalViewTransitions = true;
+  </script>
+
+  <script>
+    (() => {
+        try {
+          const stored = localStorage.getItem("themeMode");
+          if (stored ? stored === "dark" : matchMedia("(prefers-color-scheme: dark)").matches) {
+            document.documentElement.classList.add("dark");
+          }
+        } catch (_) {}
+        const apply = dark => {
+          document.documentElement.classList.toggle("dark", dark);
+          try {
+            localStorage.setItem("themeMode", dark ? "dark" : "light");
+          } catch (_) {}
+        };
+        const syncThemeSwitch = () => {
+          const dark = document.documentElement.classList.contains("dark");
+          document.querySelectorAll('#app-header input[role="switch"]').forEach(input => {
+            if (input.checked !== dark) input.checked = dark;
+          });
+        };
+        document.addEventListener("basecoat:themechange", event => {
+          const mode = event.detail?.mode;
+          apply(mode === "dark" ? true : mode === "light" ? false : !document.documentElement.classList.contains("dark"));
+          syncThemeSwitch();
+        });
+        document.addEventListener("htmx:load", syncThemeSwitch);
+        document.addEventListener("DOMContentLoaded", syncThemeSwitch, { once: true });
+      })();
+  </script>
+
+  <script>
+    (() => {
+        const SIDEBAR_KEY = 'sidebarCollapsed';
+        const isDesktop = () => window.matchMedia('(min-width: 768px)').matches;
+
+        const getSidebar = () => document.getElementById('app-sidebar');
+
+        const toggleSidebar = () => {
+          const sidebar = getSidebar();
+          if (!sidebar || typeof sidebar.toggle !== 'function') return;
+          sidebar.toggle();
+          if (isDesktop()) {
+            try {
+              const collapsed = sidebar.getAttribute('aria-hidden') === 'true';
+              localStorage.setItem(SIDEBAR_KEY, collapsed ? 'true' : 'false');
+            } catch (_) {}
+          }
+        };
+
+        const restoreSidebarState = () => {
+          const sidebar = getSidebar();
+          if (!sidebar || typeof sidebar.close !== 'function') return;
+          if (isDesktop() && localStorage.getItem(SIDEBAR_KEY) === 'true') {
+            sidebar.close();
+          }
+        };
+
+        const hookRestore = () => {
+          const sidebar = getSidebar();
+          if (!sidebar) return;
+          if (sidebar.dataset.basecoatComponent === 'sidebar') {
+            restoreSidebarState();
+          } else {
+            sidebar.addEventListener('basecoat:initialized', restoreSidebarState, { once: true });
+          }
+        };
+
+        window.toggleSidebar = toggleSidebar;
+
+        const init = () => hookRestore();
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', init, { once: true });
+        } else {
+          init();
+        }
+        document.addEventListener('htmx:load', hookRestore);
+
+        const SCROLL_KEY = 'studentFinancialTabs-scroll';
+
+        document.addEventListener('htmx:beforeRequest', (e) => {
+          const container = e.detail.elt?.closest('[data-scroll-container]');
+          if (container) {
+            sessionStorage.setItem(SCROLL_KEY, container.scrollLeft);
+          }
+        });
+
+        document.addEventListener('htmx:afterSwap', () => {
+          const saved = sessionStorage.getItem(SCROLL_KEY);
+          if (saved !== null) {
+            const container = document.querySelector('[data-scroll-container]');
+            if (container) {
+              requestAnimationFrame(() => {
+                container.scrollLeft = parseInt(saved, 10);
+              });
+            }
+          }
+        });
+      })();
+  </script>
+</head>
+
+<body class="min-h-screen flex flex-col [scrollbar-gutter:stable]" hx-boost="true" hx-target="#content"
+  hx-swap="innerHTML" hx-push-url="true">
+  <%~ include('sidebar') %>
+
+    <div class="flex flex-col flex-1 min-h-0 p-2 md:p-3">
+      <main id="content" class="bg-primary-foreground border border-border/50 flex flex-col flex-1 min-h-0 overflow-hidden rounded-xl shadow-sm"
+        hx-swap-oob="true">
+        <%~ include('header', { breadcrumbs }) %>
+
+          <div class="flex-1 p-4 xl:p-6">
+            <%~ it.body %>
+          </div>
+      </main>
+    </div>
+</body>
+
+</html>

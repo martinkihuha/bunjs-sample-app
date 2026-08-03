@@ -1,0 +1,67 @@
+<header id="app-header" class="flex items-center justify-between px-4 py-3 border-b border-border/50 md:px-4">
+  <div class="inline-flex items-center w-full gap-4">
+    <button
+      type="button"
+      class="cursor-pointer group"
+      title="Toggle sidebar"
+      data-side="right"
+      onclick="toggleSidebar()"
+    >
+      <div class="relative flex flex-col items-center justify-center size-5">
+        <span
+          class="absolute w-full h-0.5 bg-muted-foreground rounded-full -translate-y-1.5 transition-all duration-300 group-hover:rotate-45 group-hover:translate-y-0"
+        ></span>
+        <span
+          class="absolute w-full h-0.5 bg-muted-foreground rounded-full transition-all duration-300 group-hover:opacity-0 group-hover:w-3/4 group-hover:translate-x-0.5"
+        ></span>
+        <span
+          class="absolute w-full h-0.5 bg-muted-foreground rounded-full translate-y-1.5 transition-all duration-300 group-hover:-rotate-45 group-hover:translate-y-0"
+        ></span>
+      </div>
+      <span class="sr-only">Toggle sidebar</span>
+    </button>
+
+    <ul id="breadcrumbs" class="inline-flex items-center w-full gap-2 text-sm">
+      <% breadcrumbs.forEach(function(item) { %>
+        <li class="items-center hidden gap-2 nth-last-2:inline-flex last:inline-flex lg:inline-flex">
+          <% if (item?.url !=='#' ) { %>
+            <a href="<%= item?.url %>"
+              class="inline-flex items-center gap-1 transition-all duration-300 text-primary hover:underline"
+              hx-get="<%= item?.url %>" hx-target="#content" hx-swap="outerHTML" hx-push-url="true">
+              <iconify-icon icon="<%= item?.icon %>" class="text-sm"></iconify-icon>
+              <%= item?.title %>
+            </a>
+            <iconify-icon icon="heroicons:chevron-right" class="text-sm"></iconify-icon>
+          <% } else { %>
+            <span class="inline-flex items-center gap-1">
+              <iconify-icon icon="<%= item?.icon %>" class="text-sm"></iconify-icon>
+              <%= item?.title %>
+            </span>
+          <% } %>
+        </li>
+      <% }) %>
+    </ul>
+  </div>
+
+  <label
+    class="relative inline-flex shrink-0 border border-border/80 cursor-pointer items-center rounded-full"
+    data-tooltip="Toggle dark mode"
+    data-side="bottom"
+    title="Toggle dark mode"
+  >
+    <input
+      type="checkbox"
+      role="switch"
+      class="input peer before:hidden"
+      aria-label="Toggle dark mode"
+      onchange="window.basecoat.theme.set(this.checked ? 'dark' : 'light')"
+    />
+    <span
+      aria-hidden="true"
+      class="pointer-events-none absolute left-0 top-1/2 flex size-4 -translate-y-1/2 items-center justify-center rounded-full bg-background shadow-xs transition-transform duration-300 peer-checked:translate-x-[calc(100%-2px)] dark:bg-foreground dark:peer-checked:bg-primary-foreground"
+    >
+      <iconify-icon icon="radix-icons:sun" class="block text-sm text-foreground dark:hidden"></iconify-icon>
+      <iconify-icon icon="radix-icons:moon" class="hidden text-sm text-foreground dark:block"></iconify-icon>
+    </span>
+  </label>
+</header>

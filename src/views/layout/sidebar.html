@@ -1,0 +1,19 @@
+<aside id="app-sidebar" class="sidebar" data-side="left" hx-swap-oob="true">
+  <nav aria-label="Sidebar navigation">
+    <section class="scrollbar-sm">
+      <div role="group" aria-labelledby="group-label-content-1">
+        <h3 id="group-label-content-1">Main Menu</h3>
+        <ul>
+          <% it.navLinks.forEach(function(link) { %>
+            <li>
+              <a href="<%= link.url %>"<% if (it.currentPath === link.url) { %> class="bg-accent text-accent-foreground"<% } %>>
+                <iconify-icon icon="<%= it.currentPath === link.url ? link.iconSolid : link.icon %>"></iconify-icon>
+                <span><%= link.title %></span>
+              </a>
+            </li>
+            <% }) %>
+        </ul>
+      </div>
+    </section>
+  </nav>
+</aside>

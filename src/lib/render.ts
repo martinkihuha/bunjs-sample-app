@@ -1,4 +1,5 @@
 import { Eta } from 'eta'
+import type { Context } from 'hono'
 import { join } from 'path'
 
 const eta = new Eta({
@@ -8,7 +9,9 @@ const eta = new Eta({
   useWith: true,
 })
 
-export function renderView(view: string, data: Record<string, unknown>) {
+export function renderView(c: Context, view: string, data: Record<string, unknown>) {
+  const navLinks = c.get('navLinks') ?? []
+  const currentPath = c.req.path
   const body = eta.render(view, data)
-  return eta.render('layout', { ...data, body })
+  return eta.render('layout/app', { ...data, navLinks, currentPath, body })
 }

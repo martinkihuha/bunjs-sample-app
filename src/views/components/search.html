@@ -1,0 +1,25 @@
+<form action="<%= searchUrl %>" method="get"
+  class="relative inline-flex items-center w-full gap-0 transition-all duration-300 md:w-1/2">
+  <label for="search" class="sr-only">Search</label>
+  <input
+    id="search"
+    type="search"
+    name="search"
+    value="<%= value %>"
+    placeholder="<%= placeholder %>"
+    class="w-full h-9 select bg-card border border-border/50 rounded-l-full text-sm p-2 pl-4 placeholder:text-muted-foreground/50"
+    hx-get="<%= searchUrl %>"
+    hx-trigger="input delay:1000ms changed, search"
+    hx-target="#content"
+    hx-push-url="true"
+  />
+
+  <button
+    type="submit"
+    class="h-9 rounded-r-full inline-flex items-center gap-2 pl-3 pr-4 cursor-pointer bg-primary text-primary-foreground"
+    title="Click to search"
+  >
+    <iconify-icon icon="heroicons:magnifying-glass" class="text-sm"></iconify-icon>
+    <span class="sr-only">Search</span>
+  </button>
+</form>

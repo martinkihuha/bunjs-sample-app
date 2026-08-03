@@ -2,15 +2,19 @@
   "name": "sample-app",
   "scripts": {
     "dev": "bun run --hot src/index.ts",
-    "dev:css": "bunx @tailwindcss/cli -i src/css/input.css -o public/css/styles.css --watch always",
-    "dev:all": "bun run dev:css & bun run dev",
-    "build:css": "bunx @tailwindcss/cli -i src/css/input.css -o public/css/styles.css",
-    "postinstall": "cp node_modules/htmx.org/dist/htmx.min.js public/js/htmx.min.js"
+    "dev:css": "bunx @tailwindcss/cli -i src/views/css/input.css -o src/public/css/styles.css --watch always",
+    "dev:js": "bun build src/views/js/app.js --outdir src/public/js --watch",
+    "dev:all": "bun run dev:css & bun run dev:js & bun run dev",
+    "build:css": "bunx @tailwindcss/cli -i src/views/css/input.css -o src/public/css/styles.css",
+    "build:js": "bun build src/views/js/app.js --outdir src/public/js --minify"
   },
   "dependencies": {
+    "apexcharts": "^6.7.0",
+    "basecoat-css": "^1.0.2",
     "eta": "^4.6.0",
     "hono": "^4.12.32",
-    "htmx.org": "^2.0.10"
+    "htmx.org": "2.0.10",
+    "iconify-icon": "^3.0.2"
   },
   "devDependencies": {
     "@tailwindcss/cli": "^4.3.3",

@@ -1,23 +1,21 @@
 import { Hono } from 'hono'
 import { cors } from 'hono/cors'
 import { serveStatic } from 'hono/bun'
-import { renderView } from './lib/render'
+import staticPagesRoutes from './routes/static_pages.routes'
 import petRoutes from './routes/pets.routes'
+import { injectNavLinks } from './middleware/inject_nav_links'
 
 const app = new Hono()
 
 app.use(cors())
+app.use(injectNavLinks)
 
-app.use('/css/*', serveStatic({ root: './public' }))
-app.use('/js/*', serveStatic({ root: './public' }))
+app.use('/css/*', serveStatic({ root: './src/public' }))
+app.use('/js/*', serveStatic({ root: './src/public' }))
 
-app.get('/', (c) => {
-  return c.html(renderView('index', { title: 'Home', name: 'World' }))
-})
+app.get('/', (c) =>  c.redirect('/dashboard'))
 
-app.get('/about', (c) => {
-  return c.html(renderView('about', { title: 'About' }))
-})
+app.route('/', staticPagesRoutes)
 
 app.route('/pets', petRoutes)
 

@@ -1,13 +1,15 @@
-<div class="flex items-center justify-between">
-  <h1 class="text-3xl font-bold mb-6">Our Pets</h1>
+<div class="space-y-3 md:space-y-4">
+  <div class="w-full flex items-center justify-between overflow-auto">
+    <%~ include('../components/search', { searchUrl: '/pets', placeholder: 'Search pets...', value: it.search }) %>
 
-  <%~ include('_filters') %>
-</div>
+      <div class="hidden md:block"><%~ include('_filters') %></div>
+  </div>
 
-<div id="pet-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-  <% it.pets.forEach(function(pet) { %>
-    <%~ include('_pet', { pet }) %>
-    <% }) %>
+  <div id="pet-grid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6">
+    <% it.pets.forEach(function(pet) { %>
+      <%~ include('_pet', { pet }) %>
+        <% }) %>
+  </div>
 </div>
 
 <% if (it.pets.length===0) { %>

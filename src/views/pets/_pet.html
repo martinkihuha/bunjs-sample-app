@@ -1,6 +1,5 @@
 <div
-  class="relative block bg-white border border-slate-100 rounded-lg shadow-md overflow-hidden hover:scale-105 transition-all duration-300"
->
+  class="relative block card overflow-hidden p-0 hover:scale-105 transition-all duration-300">
   <div class="aspect-video bg-gray-100">
     <img
       src="<%= pet.photo %>"
@@ -13,17 +12,9 @@
 
   <div class="space-y-1 p-3">
     <div class="flex items-center justify-between">
-      <h2
-        class="text-lg font-semibold text-gray-900"
-        style="view-transition-name: pet-name-<%= pet.id %>"
-      >
-        <a
-          href="/pets/<%= pet.id %>"
-          hx-get="/pets/<%= pet.id %>"
-          hx-target="#content"
-          hx-swap="innerHTML"
-          hx-push-url="true"
-        >
+      <h2 class="text-lg font-semibold text-foreground" style="view-transition-name: pet-name-<%= pet.id %>">
+        <a href="/pets/<%= pet.id %>" hx-get="/pets/<%= pet.id %>" hx-target="#content" hx-swap="innerHTML"
+          hx-push-url="true">
           <span class="absolute inset-0"></span>
           <%= pet.name %>
         </a>
@@ -37,12 +28,18 @@
       </span>
     </div>
 
-    <div class="flex items-center justify-between text-xs text-stone-700">
-      <p style="view-transition-name: pet-breed-<%= pet.id %>">
-        <%= pet.breed %> - <%= pet.species %>
-      </p>
+    <div class="flex items-center justify-between text-xs text-secondary-foreground">
+      <div class="inline-flex items-center gap-2">
+        <iconify-icon
+          icon="<%= pet.species == 'Cat' ? 'fluent:animal-cat-16-regular' : pet.species == 'Dog' ? 'fluent:animal-dog-16-regular' : 'fluent:animal-rabbit-16-regular' %>" class="text-sm"></iconify-icon>
+        <p style="view-transition-name: pet-breed-<%= pet.id %>">
+          <%= pet.breed %> - <%= pet.species %>
+        </p>
+      </div>
 
-      <div><%= pet.age %> yr<% if (pet.age != 1) { %>s<% } %></div>
+      <div style="view-transition-name: pet-age-<%= pet.id %>">
+        <%= pet.age %> yr<% if (pet.age !=1) { %>s<% } %>
+      </div>
     </div>
   </div>
 </div>
