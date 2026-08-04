@@ -1,9 +1,11 @@
 import ApexCharts from 'apexcharts'
 import 'apexcharts/dist/apexcharts.css'
 import { lineColumnArea } from './lineColumnArea'
+import { gradientLine } from './gradientLine'
 
 const registry = {
   'line-column-area': lineColumnArea,
+  'gradient-line': gradientLine,
 }
 
 const charts = new Map()
@@ -39,9 +41,9 @@ function withTheme(options) {
       ? {
           ...options.yaxis,
           labels: { ...options.yaxis.labels, style: { ...options.yaxis.labels?.style, colors: foreground } },
-          title: options.yaxis.title
-            ? { ...options.yaxis.title, style: { ...options.yaxis.title.style, color: foreground } }
-            : undefined,
+          ...(options.yaxis.title
+            ? { title: { ...options.yaxis.title, style: { ...options.yaxis.title.style, color: foreground } } }
+            : {}),
         }
       : undefined,
     grid: {

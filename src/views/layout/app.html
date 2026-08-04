@@ -120,12 +120,12 @@
   hx-swap="innerHTML" hx-push-url="true">
   <%~ include('sidebar') %>
 
-    <div class="flex flex-col flex-1 min-h-0 p-2 md:p-3">
-      <main id="content" class="bg-background border border-border/50 flex flex-col flex-1 min-h-0 overflow-hidden rounded-xl shadow-sm"
+    <div class="flex flex-col flex-1 min-h-0 md:p-2">
+      <main id="content" class="bg-background border border-border/50 flex flex-col flex-1 min-h-0 overflow-hidden md:rounded-xl md:shadow-sm"
         hx-swap-oob="true">
         <%~ include('header', { breadcrumbs }) %>
 
-          <div class="flex-1 p-3 xl:px-6">
+          <div class="flex-1 p-3 xl:p-6">
             <%~ it.body %>
           </div>
       </main>

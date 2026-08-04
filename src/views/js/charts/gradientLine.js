@@ -1,0 +1,74 @@
+export function gradientLine() {
+  return {
+    series: [
+      {
+        name: 'Sales',
+        data: [34, 52, 41, 63, 48, 72, 55, 84, 66, 58, 91, 74, 103, 96, 118],
+      },
+    ],
+    chart: {
+      height: 350,
+      type: 'line',
+    },
+    forecastDataPoints: {
+      count: 5,
+    },
+    stroke: {
+      width: 5,
+      curve: 'smooth',
+    },
+    xaxis: {
+      type: 'datetime',
+      categories: [
+        '1/1/2025',
+        '2/1/2025',
+        '3/1/2025',
+        '4/1/2025',
+        '5/1/2025',
+        '6/1/2025',
+        '7/1/2025',
+        '8/1/2025',
+        '9/1/2025',
+        '10/1/2025',
+        '11/1/2025',
+        '12/1/2025',
+        '1/1/2026',
+        '2/1/2026',
+        '3/1/2026',
+      ],
+      tickAmount: 10,
+      labels: {
+        formatter: function (value, timestamp, opts) {
+          return opts.dateFormatter(new Date(timestamp), 'MMM yy')
+        },
+      },
+    },
+    title: {
+      text: 'Monthly Sales with Forecast',
+      align: 'left',
+      style: {
+        fontSize: '16px',
+        color: '#666',
+      },
+    },
+    yaxis: {
+      labels: {
+        formatter: function (val) {
+          return 'KES ' + val + 'k'
+        },
+      },
+    },
+    fill: {
+      type: 'gradient',
+      gradient: {
+        shade: 'dark',
+        gradientToColors: ['#FDD835'],
+        shadeIntensity: 1,
+        type: 'horizontal',
+        opacityFrom: 1,
+        opacityTo: 1,
+        stops: [0, 100, 100, 100],
+      },
+    },
+  }
+}

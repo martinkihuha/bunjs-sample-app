@@ -24,7 +24,7 @@
 
     <ul id="breadcrumbs" class="inline-flex items-center w-full gap-2 text-sm">
       <% breadcrumbs.forEach(function(item) { %>
-        <li class="items-center hidden gap-2 nth-last-2:inline-flex last:inline-flex lg:inline-flex">
+        <li class="items-center hidden gap-2 text-sm nth-last-2:inline-flex last:inline-flex lg:inline-flex">
           <% if (item?.url !=='#' ) { %>
             <a href="<%= item?.url %>"
               class="inline-flex items-center gap-1 transition-all duration-300 text-primary hover:underline"
@@ -32,10 +32,10 @@
               <iconify-icon icon="<%= item?.icon %>" class="text-sm"></iconify-icon>
               <%= item?.title %>
             </a>
-            <iconify-icon icon="heroicons:chevron-right" class="text-sm"></iconify-icon>
+            <iconify-icon icon="heroicons:chevron-right"></iconify-icon>
           <% } else { %>
             <span class="inline-flex items-center gap-1">
-              <iconify-icon icon="<%= item?.icon %>" class="text-sm"></iconify-icon>
+              <iconify-icon icon="<%= item?.icon %>"></iconify-icon>
               <%= item?.title %>
             </span>
           <% } %>
