@@ -24,6 +24,7 @@ function withTheme(options) {
     chart: {
       ...options.chart,
       foreColor: foreground,
+      background: 'transparent',
     },
     title: options.title
       ? { ...options.title, style: { ...options.title.style, color: foreground } }

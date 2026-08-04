@@ -1,20 +1,5 @@
 <form id="filters" class="flex items-center gap-1">
   <select
-    name="species"
-    class="w-full select bg-card rounded-sm placeholder:text-muted-foreground/50"
-    hx-get="/pets"
-    hx-target="#content"
-    hx-trigger="change"
-    hx-push-url="true"
-    hx-include="closest form"
-  >
-    <option value="">--- All Species ---</option>
-    <option value="dog" <%= it.species === 'dog' ? 'selected' : '' %>>Dog</option>
-    <option value="cat" <%= it.species === 'cat' ? 'selected' : '' %>>Cat</option>
-    <option value="rabbit" <%= it.species === 'rabbit' ? 'selected' : '' %>>Rabbit</option>
-  </select>
-
-  <select
     name="adopted"
     class="w-full select bg-card rounded-sm placeholder:text-muted-foreground/50"
     hx-get="/pets"
@@ -23,39 +8,9 @@
     hx-push-url="true"
     hx-include="closest form"
   >
-    <option value="">--- All Status ---</option>
+    <option value="">--- All Pets ---</option>
     <option value="false" <%= it.adopted === 'false' ? 'selected' : '' %>>Available</option>
     <option value="true" <%= it.adopted === 'true' ? 'selected' : '' %>>Adopted</option>
-  </select>
-
-  <select
-    name="minAge"
-    class="w-full select bg-card rounded-sm placeholder:text-muted-foreground/50"
-    hx-get="/pets"
-    hx-target="#content"
-    hx-trigger="change"
-    hx-push-url="true"
-    hx-include="closest form"
-  >
-    <option value="">--- Min Age ---</option>
-    <% for (let i = 1; i <= 10; i++) { %>
-      <option value="<%= i %>" <%= it.minAge === String(i) ? 'selected' : '' %>><%= i %> year<%= i != 1 ? 's' : '' %></option>
-    <% } %>
-  </select>
-
-  <select
-    name="maxAge"
-    class="w-full select bg-card rounded-sm placeholder:text-muted-foreground/50"
-    hx-get="/pets"
-    hx-target="#content"
-    hx-trigger="change"
-    hx-push-url="true"
-    hx-include="closest form"
-  >
-    <option value="">--- Max Age ---</option>
-    <% for (let i = 1; i <= 10; i++) { %>
-      <option value="<%= i %>" <%= it.maxAge === String(i) ? 'selected' : '' %>><%= i %> year<%= i != 1 ? 's' : '' %></option>
-    <% } %>
   </select>
 
   <button type="submit" class="sr-only">Filter</button>
