@@ -14,7 +14,7 @@
         <ul>
           <% it.navLinks.forEach(function(link) { %>
             <li>
-              <a href="<%= link.url %>"<% if (it.currentPath.includes(link.url)) { %> class="bg-sidebar-primary text-sidebar"<% } %>>
+              <a href="<%= link.url %>" hx-get="<%= link.url %>" hx-target="#content" hx-swap="innerHTML" hx-push-url="true"<% if (it.currentPath.includes(link.url)) { %> class="bg-sidebar-primary text-sidebar"<% } %>>
                 <iconify-icon icon="<%= it.currentPath === link.url ? link.iconSolid : link.icon %>"></iconify-icon>
                 <span><%= link.title %></span>
               </a>

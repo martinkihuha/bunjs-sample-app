@@ -28,7 +28,7 @@
           <% if (item?.url !=='#' ) { %>
             <a href="<%= item?.url %>"
               class="inline-flex items-center gap-1 transition-all duration-300 text-primary hover:underline"
-              hx-get="<%= item?.url %>" hx-target="#content" hx-swap="outerHTML" hx-push-url="true">
+              hx-get="<%= item?.url %>" hx-target="#content" hx-swap="innerHTML" hx-push-url="true">
               <iconify-icon icon="<%= item?.icon %>" class="text-sm"></iconify-icon>
               <%= item?.title %>
             </a>
