@@ -2,11 +2,11 @@
   "name": "sample-app",
   "scripts": {
     "dev": "bun run --hot src/index.ts",
-    "dev:css": "bunx @tailwindcss/cli -i src/views/css/input.css -o src/public/css/styles.css --watch always",
-    "dev:js": "bun build src/views/js/app.js --outdir src/public/js --watch",
+    "dev:css": "bunx @tailwindcss/cli -i src/views/css/input.css -o public/css/styles.css --watch always",
+    "dev:js": "bun build src/views/js/app.js --outdir public/js --watch",
     "dev:all": "bun run dev:css & bun run dev:js & bun run dev",
-    "build:css": "bunx @tailwindcss/cli -i src/views/css/input.css -o src/public/css/styles.css",
-    "build:js": "bun build src/views/js/app.js --outdir src/public/js --minify"
+    "build:css": "bunx @tailwindcss/cli -i src/views/css/input.css -o public/css/styles.css",
+    "build:js": "bun build src/views/js/app.js --outdir public/js --minify"
   },
   "dependencies": {
     "apexcharts": "^6.7.0",

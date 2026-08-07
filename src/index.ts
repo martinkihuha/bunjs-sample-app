@@ -10,8 +10,8 @@ const app = new Hono()
 app.use(cors())
 app.use(injectNavLinks)
 
-app.use('/css/*', serveStatic({ root: './src/public' }))
-app.use('/js/*', serveStatic({ root: './src/public' }))
+app.use('/css/*', serveStatic({ root: './public' }))
+app.use('/js/*', serveStatic({ root: './public' }))
 
 app.get('/', (c) =>  c.redirect('/dashboard'))
 
